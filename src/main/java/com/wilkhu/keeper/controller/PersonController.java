@@ -6,10 +6,7 @@ import com.wilkhu.keeper.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,11 @@ public class PersonController {
     public ResponseEntity<List<Person>> getPersons() {
         List<Person> people = service.findAll();
         return new ResponseEntity<List<Person>>(people, HttpStatus.OK);
+    }
+    @RequestMapping("/api/getPerson")
+    public ResponseEntity<Person> getPerson(@RequestParam(name = "id") Long id) {
+        Person p = service.findById(id);
+        return new ResponseEntity<Person>(p, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/addPersons", method = RequestMethod.POST)

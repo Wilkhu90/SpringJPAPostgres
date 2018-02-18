@@ -8,6 +8,6 @@ import java.util.List;
 public interface PersonService{
 
     List<Person> findAll();
-
     Person save(Person p);
+    Person findById(Long id);
 }

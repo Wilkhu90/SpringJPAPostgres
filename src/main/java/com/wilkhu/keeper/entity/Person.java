@@ -1,12 +1,14 @@
 package com.wilkhu.keeper.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "person")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Person implements Serializable {
 
     @Id
@@ -19,7 +21,7 @@ public class Person implements Serializable {
     @Column(name = "lastname", length = 50)
     private String lastname;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", referencedColumnName = "address_id")
     private Address address;
 
