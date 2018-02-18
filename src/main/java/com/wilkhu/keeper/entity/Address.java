@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "address")
@@ -17,8 +19,9 @@ public class Address implements Serializable{
     private String country;
     @Column(name = "city")
     private String city;
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
-    private List<Phone> phone;
+    @OneToMany
+    @JoinColumn(name = "address_id")
+    private List<Phone> phone = new ArrayList<>();
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)

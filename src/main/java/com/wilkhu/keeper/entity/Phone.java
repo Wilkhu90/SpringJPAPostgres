@@ -17,7 +17,6 @@ public class Phone {
     private String number;
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "address_id")
     private Address address;
 
     public Phone() {
