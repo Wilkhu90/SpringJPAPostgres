@@ -13,7 +13,6 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "person_id")
     private Long id;
     @Column(name = "firstname", length = 50)
     private String firstname;
@@ -22,7 +21,7 @@ public class Person implements Serializable {
     private String lastname;
 
     @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "address_id")
     private Address address;
 
     public Person() {

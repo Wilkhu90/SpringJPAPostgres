@@ -2,6 +2,7 @@ package com.wilkhu.keeper.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Phone implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "phone_id")
     private Long id;
     @Column
@@ -19,7 +20,8 @@ public class Phone implements Serializable{
     @Column
     private String number;
     @JsonIgnore
-    @ManyToOne
+    @JoinColumn(name = "address_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
 
     public Phone() {

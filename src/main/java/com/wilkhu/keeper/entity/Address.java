@@ -14,7 +14,7 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Address implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "address_id")
     private Long id;
     @Column(name = "country")
@@ -23,12 +23,11 @@ public class Address implements Serializable{
     private String city;
 
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private List<Phone> phone = new ArrayList<>();
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "person_id")
+    @OneToOne(mappedBy = "address")
     private Person person;
 
     public Address() {
