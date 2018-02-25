@@ -1,6 +1,7 @@
 package com.wilkhu.keeper.service;
 
 import com.wilkhu.keeper.entity.Person;
+import org.springframework.messaging.MessagingException;
 
 import java.util.List;
 
