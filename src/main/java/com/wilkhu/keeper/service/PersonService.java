@@ -11,4 +11,5 @@ public interface PersonService{
     List<Person> findAll();
     Person save(Person p);
     Person findById(Long id);
+    void update(Person p, Long id);
 }

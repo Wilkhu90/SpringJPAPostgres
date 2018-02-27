@@ -28,7 +28,7 @@ public class SchedulerMessage {
         return personService.findAll();
     }
 
-    @Scheduled(fixedDelay = 500)
+    @Scheduled(fixedDelay = 1000)
     public String test() {
         template.convertAndSend("/topic/greetings", personService.findAll());
         return "Hel";

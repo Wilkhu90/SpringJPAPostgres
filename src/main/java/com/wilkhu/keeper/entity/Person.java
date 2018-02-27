@@ -2,6 +2,7 @@ package com.wilkhu.keeper.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -66,6 +67,6 @@ public class Person implements Serializable {
 
     @Override
     public String toString(){
-        return "Person["+this.firstname+", "+this.address+"]";
+        return "Person["+this.firstname+", "+this.address+", "+this.getAddress()+"]";
     }
 }

@@ -1,5 +1,6 @@
 package com.wilkhu.keeper.service;
 
+import com.wilkhu.keeper.dao.AddressDao;
 import com.wilkhu.keeper.dao.PersonDao;
 import com.wilkhu.keeper.entity.Person;
 import javafx.scene.media.MediaException;
@@ -9,6 +10,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +20,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonDao personDao;
+    @Autowired
+    private AddressDao addressDao;
 
     @Override
     public List<Person> findAll() {
@@ -32,6 +36,16 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person findById(Long id) {
         return (Person) personDao.getOne(id);
+    }
+
+    @Override
+    @Transactional
+    public void update(Person p, Long id) {
+        System.out.println(p);
+        personDao.updateName(p.getFirstname(), p.getLastname(), id);
+        Person getPerson = personDao.findOne(id);
+        addressDao.updateAddress(p.getAddress().getCountry(), p.getAddress().getCity(), getPerson.getAddress().getId());
+
     }
 
 }

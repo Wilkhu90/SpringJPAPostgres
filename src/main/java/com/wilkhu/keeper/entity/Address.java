@@ -2,6 +2,7 @@ package com.wilkhu.keeper.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,6 +37,10 @@ public class Address implements Serializable{
     public Address(String country, String city) {
         this.country = country;
         this.city = city;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public List<Phone> getPhone() {

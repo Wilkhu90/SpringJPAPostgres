@@ -26,6 +26,13 @@ public class PersonController {
         Person p = service.findById(id);
         return new ResponseEntity<Person>(p, HttpStatus.OK);
     }
+    @RequestMapping(path = "/api/getPerson/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Person> getPerson(@RequestBody String str, @PathVariable Long id) {
+        Gson util = new Gson();
+        Person p = util.fromJson(str, Person.class);
+        service.update(p, id);
+        return new ResponseEntity<Person>(p, HttpStatus.OK);
+    }
 
     @RequestMapping(path = "/api/addPersons", method = RequestMethod.POST)
     public ResponseEntity<Person> savePerson(@RequestBody String str) {
